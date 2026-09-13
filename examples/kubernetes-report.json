@@ -1,0 +1,57 @@
+{
+  "summary": {
+    "critical": 1,
+    "medium": 2,
+    "low": 1
+  },
+  "findings": [
+    {
+      "source": "kubernetes",
+      "rule_id": "K8S-CTR-001",
+      "severity": "critical",
+      "title": "Privileged container",
+      "resource": "Deployment/demo:app",
+      "message": "Container runs in privileged mode.",
+      "remediation": "Remove privileged mode and grant only narrowly scoped Linux capabilities if required.",
+      "evidence": {
+        "privileged": true
+      }
+    },
+    {
+      "source": "kubernetes",
+      "rule_id": "K8S-CTR-002",
+      "severity": "medium",
+      "title": "runAsNonRoot not enforced",
+      "resource": "Deployment/demo:app",
+      "message": "The container does not explicitly enforce a non-root runtime user.",
+      "remediation": "Set securityContext.runAsNonRoot=true and use an image with a non-root user.",
+      "evidence": {
+        "runAsNonRoot": null
+      }
+    },
+    {
+      "source": "kubernetes",
+      "rule_id": "K8S-CTR-003",
+      "severity": "medium",
+      "title": "Privilege escalation not disabled",
+      "resource": "Deployment/demo:app",
+      "message": "allowPrivilegeEscalation is not explicitly false.",
+      "remediation": "Set securityContext.allowPrivilegeEscalation=false unless a documented exception exists.",
+      "evidence": {
+        "allowPrivilegeEscalation": null
+      }
+    },
+    {
+      "source": "kubernetes",
+      "rule_id": "K8S-CTR-004",
+      "severity": "low",
+      "title": "Resource requests/limits incomplete",
+      "resource": "Deployment/demo:app",
+      "message": "Container does not define both resource requests and limits.",
+      "remediation": "Set CPU and memory requests/limits based on measured workload behavior.",
+      "evidence": {
+        "resources": {}
+      }
+    }
+  ]
+}

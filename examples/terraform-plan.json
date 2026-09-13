@@ -1,0 +1,20 @@
+{
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "type": "aws_security_group",
+          "address": "aws_security_group.public_admin",
+          "values": {
+            "ingress": [{"from_port": 22, "to_port": 22, "cidr_blocks": ["0.0.0.0/0"]}]
+          }
+        },
+        {
+          "type": "aws_db_instance",
+          "address": "aws_db_instance.app",
+          "values": {"storage_encrypted": false, "publicly_accessible": true}
+        }
+      ]
+    }
+  }
+}
